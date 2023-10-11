@@ -1,13 +1,11 @@
 """
 User Models
 """
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Enum
-from sqlalchemy.orm import relationship
-from datetime import datetime
+from sqlalchemy import Column, String, Boolean
 import os
 from uuid import uuid4
 
-from database.database import Base
+from dynasty.database.database import Base
 
 
 class User(Base):

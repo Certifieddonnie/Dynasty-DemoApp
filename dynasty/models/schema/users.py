@@ -21,4 +21,10 @@ class User(UserBase):
     is_active: bool
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+        json_schema_extra = {
+            "example": {
+                "id": "1",
+                "email": "example@example.com",
+            }
+        }

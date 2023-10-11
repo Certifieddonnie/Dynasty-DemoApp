@@ -4,7 +4,8 @@ Main Application
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
-from routes.v1 import users
+from dynasty.routes.v1 import users, fruits
+import uvicorn
 
 
 app = FastAPI()
@@ -25,8 +26,9 @@ app.add_middleware(
 )
 
 app.include_router(users.router, prefix="/api/v1")
+app.include_router(fruits.router, prefix="/api/v1/fruits")
 
 
-@app.get("/")
-async def home():
+@app.get("/api/v1/", tags=["Root"])
+async def home() -> dict:
     return {"message": "Welcome to DevDynasty API", "status": 200}

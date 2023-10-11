@@ -1,14 +1,14 @@
 """ CRUD operations for users """
 from sqlalchemy.orm import Session
-from models.v1.users import User
-from models.schema.users import UserCreate, UserBase
-from utils.utils import get_password_hash
+from dynasty.models.v1.users import User
+from dynasty.models.schema.users import UserCreate, UserBase
 from fastapi import HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer
-from configs.config import configs
-from jose import JWTError, jwt
-from utils.utils import get_db, decode_token
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+from jose import JWTError
+from dynasty.utils.utils import decode_token, get_password_hash, get_db
+
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 def get_user(db: Session, user_id: str):
@@ -29,7 +29,7 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
 def create_user(db: Session, user: UserCreate):
     """ Create a user """
     hashed_password = get_password_hash(user.password)
-    db_user = User(email=user.email, password=hashed_password)
+    db_user = User(email=user.email, hashed_password=hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -38,20 +38,20 @@ def create_user(db: Session, user: UserCreate):
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     """ Get the current user """
-    configs = configs.get("development")
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Invalid credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
+        # print("Hello!")
         payload = decode_token(token)
         email: str = payload.get("sub")
         if email is None:
             raise credentials_exception
     except JWTError:
         raise credentials_exception
-    user = get_user_by_email(db, email=email)
+    user = get_user_by_email(db=db, email=email)
     if user is None:
         raise credentials_exception
-    return UserBase(email=user.email)
+    return user

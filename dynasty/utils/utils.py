@@ -3,15 +3,13 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from datetime import datetime, timedelta
-from configs.config import configs
+from dynasty.configs.config import SECRET_KEY
 from fastapi import HTTPException, status
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-configs = configs.get("development")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 
 def verify_password(plain_password: str, hashed_password: str):
@@ -43,14 +41,14 @@ def create_access_token(data: dict, expires_delta: int):
     else:
         expire = datetime.utcnow() + timedelta(seconds=3600)
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, configs.SECRET_KEY, algorithm="HS256")
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm="HS256")
     return encoded_jwt
 
 
 def decode_token(token: str):
     """ Decode a token """
     try:
-        payload = jwt.decode(token, configs.SECRET_KEY, algorithms=["HS256"])
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
         return payload
     except JWTError:
         raise HTTPException(

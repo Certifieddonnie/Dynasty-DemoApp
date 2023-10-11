@@ -4,13 +4,11 @@ Database Configuration File
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from dynasty.configs.config import DATABASE_URI
 
-from configs.config import configs
-
-config = configs["development"]
 
 engine = create_engine(
-    config.DATABASE_URI, echo=False, connect_args={"check_same_thread": False}
+    DATABASE_URI, echo=False, pool_pre_ping=True, pool_size=20, max_overflow=0
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
