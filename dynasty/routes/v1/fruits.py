@@ -9,7 +9,7 @@ from dynasty.models.schema.users import User
 router = APIRouter()
 
 
-@router.get("/all/")
+@router.get("/all/", status_code=status.HTTP_200_OK, tags=["fruits"])
 async def get_all_fruits(skip: int = 0, limit: int = 100, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     """ Get all fruits """
     if current_user:
@@ -25,7 +25,7 @@ async def get_all_fruits(skip: int = 0, limit: int = 100, current_user: User = D
                         "WWW-Authenticate": "Bearer"})
 
 
-@router.get("/search/")
+@router.get("/search/", status_code=status.HTTP_200_OK, tags=["fruits"])
 async def search_fruits(q: str = Query(None, min_length=2, max_length=50), current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     """ Search for a fruit """
     if current_user:

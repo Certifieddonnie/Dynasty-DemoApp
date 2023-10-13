@@ -34,7 +34,7 @@ async def login_user(user: UserCreate, db: Session = Depends(get_db)):
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.get("/user/profile/", status_code=status.HTTP_200_OK)
+@router.get("/user/profile/", status_code=status.HTTP_200_OK, tags=["users"])
 async def get_me(current_user: User = Depends(get_current_user)):
     """ Get the current user """
     # return print("Before")
