@@ -1,0 +1,42 @@
+[
+  {
+    "id": 5,
+    "name": "Carrot",
+    "botanical_name": "Daucus carota",
+    "vitamin": "A",
+    "benefits": "High in fibre, potassium, and anti-oxidants",
+    "side_effects": "Skin rashes, Diarrhea, Swelling",
+    "ph": "6.2 - 4.4",
+    "preservation_methods": "Refrigeraion, Freezing"
+  },
+  {
+    "id": 19,
+    "name": "Potato",
+    "botanical_name": "Solanum tuberosum",
+    "vitamin": "C",
+    "benefits": "High in Carbohydrates, Anti-oxidants",
+    "side_effects": "Low blood Pressure, Dehydration",
+    "ph": "5.4 - 6.0",
+    "preservation_methods": "Canning, Freezing..."
+  },
+  {
+    "id": 20,
+    "name": "Sweet Potatoes",
+    "botanical_name": "Ipomoea batatas",
+    "vitamin": "A",
+    "benefits": "Vitamins and Minerals, Anti-oxidants",
+    "side_effects": "Headaches, Skin Rashes",
+    "ph": "5.3 - 6.6",
+    "preservation_methods": "Canning, Freezing..."
+  },
+  {
+    "id": 23,
+    "name": "Apricots",
+    "botanical_name": "Prunus armeniaca",
+    "vitamin": "A",
+    "benefits": "High in Fibre, Vitamins, Minerals",
+    "side_effects": "Nausea, Headaches",
+    "ph": "3.4 - 4.5",
+    "preservation_methods": "Refrigeration, Drying"
+  }
+]

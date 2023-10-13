@@ -10,7 +10,7 @@ from dynasty.configs.config import JWT_ACCESS_TOKEN_EXPIRES
 router = APIRouter()
 
 
-@router.post("/register/", status_code=status.HTTP_201_CREATED, tags=["users"], response_model=UserBase)
+@router.post("/auth/register/", status_code=status.HTTP_201_CREATED, tags=["users"], response_model=UserBase)
 async def register_user(user: UserCreate, db: Session = Depends(get_db)):
     """ Register a user """
     db_user = get_user_by_email(db, email=user.email)
@@ -19,7 +19,7 @@ async def register_user(user: UserCreate, db: Session = Depends(get_db)):
     return create_user(db=db, user=user)
 
 
-@router.post("/token/", tags=["users"], status_code=status.HTTP_200_OK)
+@router.post("/auth/token/", tags=["users"], status_code=status.HTTP_200_OK)
 async def login_user(user: UserCreate, db: Session = Depends(get_db)):
     """ Login a user """
     db_user = get_user_by_email(db, email=user.email)
@@ -34,7 +34,7 @@ async def login_user(user: UserCreate, db: Session = Depends(get_db)):
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.get("/profile/", status_code=status.HTTP_200_OK)
+@router.get("/user/profile/", status_code=status.HTTP_200_OK)
 async def get_me(current_user: User = Depends(get_current_user)):
     """ Get the current user """
     # return print("Before")

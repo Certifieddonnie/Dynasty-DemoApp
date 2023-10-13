@@ -6,9 +6,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from dynasty.routes.v1 import users, fruits
 import uvicorn
+from trenasty.middleware.treblle import TreblleMiddleware
 
 
 app = FastAPI()
+
+app.middleware("http")(TreblleMiddleware(app))
 
 origins = [
     # "https://devdynasty.netlify.app",
