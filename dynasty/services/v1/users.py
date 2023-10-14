@@ -6,9 +6,11 @@ from fastapi import HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError
 from dynasty.utils.utils import decode_token, get_password_hash, get_db
+from dynasty.configs.config import HEADERS
+from fastapi.responses import JSONResponse
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/token/")
 
 
 def get_user(db: Session, user_id: str):
@@ -33,7 +35,8 @@ def create_user(db: Session, user: UserCreate):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
-    return {"id": db_user.id, "email": db_user.email}
+    custom_data = {"id": db_user.id, "email": db_user.email}
+    return JSONResponse(content=custom_data, headers=HEADERS)
 
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
@@ -41,17 +44,20 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Invalid credentials",
-        headers={"WWW-Authenticate": "Bearer"},
+        headers=HEADERS,
     )
     try:
         # print("Hello!")
         payload = decode_token(token)
         email: str = payload.get("sub")
         if email is None:
+            HEADERS["WWW-Authenticate"] = "Bearer"
             raise credentials_exception
     except JWTError:
+        HEADERS["WWW-Authenticate"] = "Bearer"
         raise credentials_exception
     user = get_user_by_email(db=db, email=email)
     if user is None:
+        HEADERS["WWW-Authenticate"] = "Bearer"
         raise credentials_exception
     return user

@@ -5,12 +5,14 @@ from sqlalchemy.orm import Session
 from dynasty.utils.utils import get_db
 from dynasty.services.v1.users import get_current_user
 from dynasty.models.schema.users import User
+from dynasty.configs.config import HEADERS
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
 
 @router.get("/all/", status_code=status.HTTP_200_OK, tags=["fruits"])
-async def get_all_fruits(skip: int = 0, limit: int = 100, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+async def get_all_fruits(skip: int = 0, limit: int = 10, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     """ Get all fruits """
     if current_user:
         query = text("SELECT * FROM fruits LIMIT :limit OFFSET :skip")
@@ -20,9 +22,10 @@ async def get_all_fruits(skip: int = 0, limit: int = 100, current_user: User = D
                    'vitamin': result[3],
                    'benefits': result[4], 'side_effects': result[5],
                    'ph': result[6], 'preservation_methods': result[7]} for result in results]
-        return fruits
-    raise HTTPException(status_code=404, detail="User not found", headers={
-                        "WWW-Authenticate": "Bearer"})
+        custom_data = {"fruits": fruits, "total": len(fruits), "skip": skip, "limit": limit}
+        return JSONResponse(content=custom_data, headers=HEADERS)
+    HEADERS["WWW-Authenticate"] = "Bearer"
+    raise HTTPException(status_code=404, detail="User not found", headers=HEADERS)
 
 
 @router.get("/search/", status_code=status.HTTP_200_OK, tags=["fruits"])
@@ -38,8 +41,9 @@ async def search_fruits(q: str = Query(None, min_length=2, max_length=50), curre
                    'ph': result[6], 'preservation_methods': result[7]} for result in results]
 
         if len(fruits) == 0:
-            raise HTTPException(status_code=404, detail="Fruit not found", headers={
-                                "WWW-Authenticate": "Bearer"})
-        return fruits
-    raise HTTPException(status_code=404, detail="User not found", headers={
-                        "WWW-Authenticate": "Bearer"})
+            HEADERS["WWW-Authenticate"] = "Bearer"
+            raise HTTPException(status_code=404, detail="Fruit not found", headers=HEADERS)
+        custom_data = {"fruits": fruits, "total": len(fruits)}
+        return JSONResponse(content=custom_data, headers=HEADERS)
+    HEADERS["WWW-Authenticate"] = "Bearer"
+    raise HTTPException(status_code=404, detail="User not found", headers=HEADERS)

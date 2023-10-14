@@ -1,0 +1,2 @@
+###########
+This is a directory that includes the request files that curls all endpoints

@@ -21,3 +21,18 @@ JWT_COOKIE_CSRF_PROTECT = False
 
 sql_lite = "sqlite:///development.db"
 DATABASE_URI = os.getenv("DATABASE_URL", default=sql_lite)
+
+HEADERS = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "X-Frame-Options": "deny",
+    "X-Content-Type-Options": "nosniff",
+    "X-RateLimit-Limit": "1000",
+    "Content-Security-Policy": "default-src 'self'",
+    "Access-Control-Allow-Origin": "*",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+    "Allow": "GET, POST, HEAD, OPTIONS",
+    "Cache-Control": "no-cache",
+    "Content-Encoding": "gzip",
+    "Accept-Encoding": "gzip, deflate",
+}

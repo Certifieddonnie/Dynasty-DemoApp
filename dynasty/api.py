@@ -1,11 +1,12 @@
 """
 Main Application
 """
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
 from dynasty.routes.v1 import users, fruits
 import uvicorn
+from dynasty.configs.config import HEADERS
 from trenasty.middleware.treblle import TreblleMiddleware
 
 
@@ -34,4 +35,7 @@ app.include_router(fruits.router, prefix="/api/v1/fruits")
 
 @app.get("/api/v1/", tags=["Root"])
 async def home() -> dict:
-    return {"message": "Welcome to DevDynasty API", "status": 200}
+    """ Root Endpoint """
+    custom_data = {"message": "Welcome to DevDynasty API", "status_code": 200}
+
+    return JSONResponse(content=custom_data, headers=HEADERS)

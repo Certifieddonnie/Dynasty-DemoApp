@@ -5,7 +5,8 @@ from dynasty.services.v1.users import create_user, get_user_by_email, get_curren
 from dynasty.models.schema.users import UserCreate, UserBase
 from sqlalchemy.orm import Session
 from dynasty.models.v1.users import User
-from dynasty.configs.config import JWT_ACCESS_TOKEN_EXPIRES
+from dynasty.configs.config import JWT_ACCESS_TOKEN_EXPIRES, HEADERS
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
@@ -31,7 +32,8 @@ async def login_user(user: UserCreate, db: Session = Depends(get_db)):
                             "WWW-Authenticate": "Bearer"})
     access_token = create_access_token(
         data={"sub": db_user.email}, expires_delta=JWT_ACCESS_TOKEN_EXPIRES)
-    return {"access_token": access_token, "token_type": "bearer"}
+    custom_data = {"access_token": access_token, "token_type": "bearer"}
+    return JSONResponse(content=custom_data, headers=HEADERS)
 
 
 @router.get("/user/profile/", status_code=status.HTTP_200_OK, tags=["users"])
@@ -40,6 +42,7 @@ async def get_me(current_user: User = Depends(get_current_user)):
     # return print("Before")
     if current_user:
         # print("After")
-        return current_user
+        custom_data = {"id": current_user.id, "email": current_user.email}
+        return JSONResponse(content=custom_data, headers=HEADERS)
     raise HTTPException(status_code=404, detail="User not found", headers={
                         "WWW-Authenticate": "Bearer"})
