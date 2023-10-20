@@ -17,7 +17,6 @@ This is the FastAPI SDK built for Treblle. [Access it here](https://github.com/C
 3. [Examples](#examples)
 4. [SDK-Integration](sdk-integration)
 
-
 ## Getting Started
 
 To begin using the API, you can simply make requests to the available API endpoints listed below. User authentication is required for accessing the basic information about fruits and vegetables.
