@@ -11,17 +11,12 @@ This is the FastAPI SDK built for Treblle. [Access it here](https://github.com/C
         - [Welcome view](#welcome-view)
         - [Register](#register)
         - [Login](#login)
-        - [User profile](#user-profile)
-        - [Update profile](#update-profile)
-        - [Change password](#change-password)
-        - [Delete user](#delete-user)
     - [Item Search](#item-search)
         - [All items](#all-items)
         - [One_item](#one-item)
-3. [Error Handling](#error-handling)
-4. [Examples](#examples)
-5. [Contributing](#contributing)
-6. [License](#license)
+3. [Examples](#examples)
+4. [SDK-Integration](sdk-integration)
+
 
 ## Getting Started
 
@@ -29,7 +24,7 @@ To begin using the API, you can simply make requests to the available API endpoi
 
 ## API Endpoints
 
-## Authentication
+### Authentication
 
 ### Welcome view
 **Endpoint:** `/api/vi/auth`
@@ -51,7 +46,7 @@ GET /api/vi/auth
 ```
 /api/vi/auth/register
 ```
-**Response:** This request enables new users to enter their details and thereafter use to get logged in.
+**Response:** This request enables new users to enter their details and thereafter use them to get logged in.
 
 ### Login
 **Endpoint:** `/api/vi/auth/token`
@@ -62,7 +57,7 @@ GET /api/vi/auth
 ```
 /api/vi/auth/token
 ```
-**Response:** This request leads old users to the page where they enter their login details and get logged in to utilise and consume the API.
+**Response:** This request leads old users to the page where they enter their login details and get logged in to utilize and consume the API.
 
 ### User profile
 **Endpoint:** `/api/vi/user/profile`
@@ -73,7 +68,7 @@ GET /api/vi/auth
 ```
 GET /api/vi/user/profile
 ```
-**Response:**  It serves as a representation of a user's identity and contains details that are relevant to the user's interactions, preferences, and personalization within the given context.
+**Response:**  It represents a user's identity and contains details relevant to the user's interactions, preferences, and personalization within the given context.
 
 ## Item search
 Search for fruits or vegetables based on a keyword or partial name.
@@ -167,3 +162,7 @@ Usage samples and code snippets
 ```
 /api/v1/fruits/search?name=Orange
 ```
+
+## SDK-Integration
+To successfully integrate the Treblle-Dynasty SDK in your app, follow the steps highlighted [here](https://github.com/Certifieddonnie/treblle-dynasty/blob/develop/README.md)
+
