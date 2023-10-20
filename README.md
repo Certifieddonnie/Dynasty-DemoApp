@@ -26,18 +26,18 @@ To begin using the API, you can simply make requests to the available API endpoi
 ### Authentication
 
 ### Welcome view
-**Endpoint:** `/api/vi/auth`
+**Endpoint:** `/api/v1/auth`
 
 **Method:** "GET"
 
 **Example Request**
 ```
-GET /api/vi/auth
+GET /api/v1/auth
 ```
 **Response:** This request leads you to the welcome view.
 
 ### Register
-**Endpoint:** `/api/vi/auth/register`
+**Endpoint:** `/api/v1/auth/register`
 
 **Method:** "POST"
 
@@ -48,24 +48,24 @@ GET /api/vi/auth
 **Response:** This request enables new users to enter their details and thereafter use them to get logged in.
 
 ### Login
-**Endpoint:** `/api/vi/auth/token`
+**Endpoint:** `/api/v1/auth/token`
 
 **Method:** "POST"
 
 **Example Request**
 ```
-/api/vi/auth/token
+/api/v1/auth/token
 ```
 **Response:** This request leads old users to the page where they enter their login details and get logged in to utilize and consume the API.
 
 ### User profile
-**Endpoint:** `/api/vi/user/profile`
+**Endpoint:** `/api/v1/user/profile`
 
 **Method:** "GET"
 
 **Example Request**
 ```
-GET /api/vi/user/profile
+GET /api/v1/user/profile
 ```
 **Response:**  It represents a user's identity and contains details relevant to the user's interactions, preferences, and personalization within the given context.
 
@@ -74,12 +74,12 @@ Search for fruits or vegetables based on a keyword or partial name.
 
 ### All items
 
-**Endpoint:** `/api/vi/fruits/all`
+**Endpoint:** `/api/v1/fruits/all`
 
 **Method:** "GET"
 
 ```
-GET /api/vi/fruits/all
+GET /api/v1/fruits/all
 ```
 **Example Response**
 ```
@@ -105,7 +105,7 @@ GET /api/vi/fruits/all
 
 ### One item
 
-**Endpoint:** `/api/vi/fruits/search`
+**Endpoint:** `/api/v1/fruits/search`
 
 **Method:** "GET"
 
@@ -116,7 +116,7 @@ GET /api/vi/fruits/all
 
 **Query search by name**
 ```
-GET /api/vi/fruits/search?q=banana
+GET /api/v1/fruits/search?q=banana
 ```
 **Example Response**
 ```
@@ -131,35 +131,6 @@ GET /api/vi/fruits/search?q=banana
   ]
 }
 
-```
-
-## Examples
-
-Usage samples and code snippets
-```
-/api/v1/
-```
-
-![image](https://github.com/Certifieddonnie/Dynasty-DemoApp/assets/81980032/b62ae256-1498-4429-8848-9b234c03cb06)
-
-```
-/api/vi/auth/register/
-```
-
-```
-/api/v1/auth/token/
-```
-
-```
-/api/v1/user/profile
-```
-
-```
-/api/v1/fruits/all
-```
-
-```
-/api/v1/fruits/search?q=Orange
 ```
 
 ## SDK-Integration
