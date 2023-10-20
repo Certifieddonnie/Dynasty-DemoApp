@@ -147,19 +147,19 @@ Usage samples and code snippets
 ```
 
 ```
-/api/v1/auth/login/
+/api/v1/auth/token/
 ```
 
 ```
-/api/v1/auth/user/
+/api/v1/user/profile
 ```
 
 ```
-/api/v1/fruits
+/api/v1/fruits/all
 ```
 
 ```
-/api/v1/fruits/search?name=Orange
+/api/v1/fruits/search?q=Orange
 ```
 
 ## SDK-Integration
