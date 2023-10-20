@@ -138,26 +138,26 @@ GET /api/vi/fruits/search?q=banana
 
 Usage samples and code snippets
 ```
+/api/v1/
+```
+
+![image](https://github.com/Certifieddonnie/Dynasty-DemoApp/assets/81980032/b62ae256-1498-4429-8848-9b234c03cb06)
+
+```
 /api/vi/auth/register/
 ```
-![image](https://github.com/Certifieddonnie/GreenBounty/assets/81980032/af3a6c6c-bc4c-404c-82d3-8bd4bc453434)
 
 ```
 /api/v1/auth/login/
 ```
-![image](https://github.com/Certifieddonnie/GreenBounty/assets/81980032/1ea8e4d5-5543-4a0e-af9f-f36a2b7cfffe)
 
 ```
 /api/v1/auth/user/
 ```
-![image](https://github.com/Certifieddonnie/GreenBounty/assets/81980032/5a7c3f79-9fae-4640-a2af-0628db7c96b9)
-
 
 ```
 /api/v1/fruits
 ```
-![image](https://github.com/Certifieddonnie/GreenBounty/assets/81980032/06e1ebfd-31c4-4a18-a0b0-27e2daa64284)
-
 
 ```
 /api/v1/fruits/search?name=Orange
